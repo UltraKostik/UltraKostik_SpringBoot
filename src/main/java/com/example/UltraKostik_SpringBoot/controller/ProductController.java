@@ -1,8 +1,8 @@
 package com.example.UltraKostik_SpringBoot.controller;
 
 
-import com.example.UltraKostik_SpringBoot.model.Product;
-import com.example.UltraKostik_SpringBoot.service.ProductService;
+import com.example.UltraKostik_SpringBoot.model.Employee;
+import com.example.UltraKostik_SpringBoot.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService productService;
+    private final EmployeeService employeeService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public ProductController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping
     public String listProducts(Model model){
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", employeeService.getAllProducts());
         return "products-list";
     }
 
     @GetMapping("/add")
     public String FormAddProduct(Model model){
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new Employee());
         return "product-form";
     }
 
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute("product") Product product){
-        productService.saveProduct(product);
+    public String addProduct(@ModelAttribute("product") Employee employee){
+        employeeService.saveProduct(employee);
         return "redirect:/products";
     }
 }

@@ -7,7 +7,7 @@
 <body>
 <h1>Добавить товар</h1>
 
-<form th:action="@{/products/add}" th:object="${product}" method="post">
+<form th:action="@{/products/add}" th:object="${employee}" method="post">
     <p>
         <label>Название:
             <input type="text" th:field="*{name}" required/>

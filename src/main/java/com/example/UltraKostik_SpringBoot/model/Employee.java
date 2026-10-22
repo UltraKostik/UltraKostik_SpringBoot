@@ -26,7 +26,7 @@ public class Employee {
 
     @Email(message = "Некорректный формат электронной почты")
     @NotBlank(message = "Почта не должна быть пустой")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     
     @Pattern(regexp = "^(\\+7|8)?\\d{10}$")

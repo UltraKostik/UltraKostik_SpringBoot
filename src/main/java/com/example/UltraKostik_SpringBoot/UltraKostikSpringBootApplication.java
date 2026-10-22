@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UltraKostekSpringBootApplication {
+public class UltraKostikSpringBootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UltraKostekSpringBootApplication.class, args);
+        SpringApplication.run(UltraKostikSpringBootApplication.class, args);
     }
 
 }

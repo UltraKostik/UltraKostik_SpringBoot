@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудники</title>
+</head>
+<body>
+<h2>Список сотрудников</h2>
+<form method="get" th:action="@{/employees}">
+    <input type="text" name="name" th:value="${name}" placeholder="Поиск по ФИО">
+    <select name="active">
+        <option value="all" th:selected="${active == null || active == 'all'}">Все</option>
+        <option value="true" th:selected="${active == 'true'}">Активные</option>
+        <option value="false" th:selected="${active == 'false'}">Неактивные</option>
+    </select>
+    <button type="submit">Найти</button>
+    <a th:href="@{/employees/add}">Добавить</a>
+</form>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>ФИО</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Должность</th>
+        <th>Зарплата</th>
+        <th>Активен</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="emp : ${employees}">
+        <td th:text="${emp.id}"></td>
+        <td th:text="${emp.fullName}"></td>
+        <td th:text="${emp.email}"></td>
+        <td th:text="${emp.phone}"></td>
+        <td th:text="${emp.position}"></td>
+        <td th:text="${emp.salary}"></td>
+        <td th:text="${emp.active ? 'Да' : 'Нет'}"></td>
+        <td>
+            <a th:href="@{/employees/edit/{id}(id=${emp.id})}">Изменить</a>
+            <form th:action="@{/employees/delete/{id}(id=${emp.id})}" method="post" style="display:inline;">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

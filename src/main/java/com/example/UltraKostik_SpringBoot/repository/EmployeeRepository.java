@@ -7,8 +7,8 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    boolean existsByEmail(String email, Long id);
-    boolean existsByEmailAndIdNot(String email);
+    boolean existsByEmail(String email);
+    boolean existsByEmailAndIdNot(String email, Long id);
     List<Employee> findByFullNameContainingIgnoreCase(String fullName);
     List<Employee> findByActive(Boolean active);
     List<Employee> findByFullNameContainingIgnoreCaseAndActive(String fullName, Boolean active);

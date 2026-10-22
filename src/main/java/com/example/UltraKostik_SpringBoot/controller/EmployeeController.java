@@ -1,12 +1,12 @@
 package com.example.UltraKostik_SpringBoot.controller;
 
-import ch.qos.logback.core.model.Model;
+import jakarta.validation.Valid;
+import org.springframework.ui.Model;
 import com.example.UltraKostik_SpringBoot.model.Employee;
 import com.example.UltraKostik_SpringBoot.service.EmployeeService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,21 +19,48 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-//    @GetMapping
-//    public String list(@RequestParam(required = false) String name, @RequestParam(required = false) String active, Model model) {
-//        List<Employee> list = employeeService.search(name, active);
-//    return "employees-list";
-//    }
-//
-//    @GetMapping("/add")
-//    public String FormAddProduct(Model model){
-//        model.addAttribute("product", new Employee());
-//        return "product-form";
-//    }
-//
-//    @PostMapping("/add")
-//    public String addProduct(@ModelAttribute("product") Employee employee){
-//        employeeService.saveProduct(employee);
-//        return "redirect:/products";
-//    }
+
+    @GetMapping
+    public String listEmployees(@RequestParam(required = false) String name, @RequestParam(required = false) String active, Model model){
+
+        List<Employee> employees = employeeService.search(name, active);
+        model.addAttribute("employees", employees);
+        model.addAttribute("name", name);
+        model.addAttribute("active", active);
+        return "employees-list";
+    }
+
+    @GetMapping("/add")
+    public String addForm(Model model){
+        model.addAttribute("employee",new Employee());
+        return "employee-form";
+    }
+
+    @PostMapping("/add")
+    public String addValid(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "employee-form";
+        }
+        try {
+            employeeService.saveEmployee(employee);
+        } catch (RuntimeException e) {
+            bindingResult.rejectValue("email", "error.employee", e.getMessage());
+            return "employee-form";
+        }
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model){
+        Employee employee = employeeService.getById(id);
+        model.addAttribute("employee", employee);
+        return "employee-form";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/employees";
+    }
+
 }

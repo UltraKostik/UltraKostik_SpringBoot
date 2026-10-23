@@ -1,9 +1,9 @@
 package com.example.UltraKostik_SpringBoot.repository;
 
-import com.example.UltraKostik_SpringBoot.model.User;
+import com.example.UltraKostik_SpringBoot.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<User, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 }

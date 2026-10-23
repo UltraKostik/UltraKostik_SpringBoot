@@ -1,7 +1,7 @@
 package com.example.UltraKostik_SpringBoot.service;
 
 import com.example.UltraKostik_SpringBoot.model.User;
-import com.example.UltraKostik_SpringBoot.repository.ProductRepository;
+import com.example.UltraKostik_SpringBoot.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
+    private final UserRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(UserRepository productRepository) {
         this.productRepository = productRepository;
     }
 

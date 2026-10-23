@@ -1,7 +1,7 @@
 package com.example.UltraKostik_SpringBoot.controller;
 
 
-import com.example.UltraKostik_SpringBoot.model.Product;
+import com.example.UltraKostik_SpringBoot.model.User;
 import com.example.UltraKostik_SpringBoot.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +28,12 @@ public class ProductController {
 
     @GetMapping("/add")
     public String FormAddProduct(Model model){
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new User());
         return "product-form";
     }
 
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute("product") Product product){
+    public String addProduct(@ModelAttribute("product") User product){
         productService.saveProduct(product);
         return "redirect:/products";
     }

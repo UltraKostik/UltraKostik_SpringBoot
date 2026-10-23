@@ -1,6 +1,6 @@
 package com.example.UltraKostik_SpringBoot.service;
 
-import com.example.UltraKostik_SpringBoot.model.Product;
+import com.example.UltraKostik_SpringBoot.model.User;
 import com.example.UltraKostik_SpringBoot.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,11 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public void saveProduct(Product product){
+    public void saveProduct(User product){
         productRepository.save(product);
     }
 
-    public List<Product> getAllProducts(){
+    public List<User> getAllProducts(){
         return productRepository.findAll();
     }
 }

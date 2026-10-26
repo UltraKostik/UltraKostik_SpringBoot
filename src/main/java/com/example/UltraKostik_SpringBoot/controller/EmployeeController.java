@@ -2,7 +2,7 @@ package com.example.UltraKostik_SpringBoot.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.ui.Model;
-import com.example.UltraKostik_SpringBoot.model.Employee;
+import com.example.UltraKostik_SpringBoot.model.User;
 import com.example.UltraKostik_SpringBoot.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,7 +23,7 @@ public class EmployeeController {
     @GetMapping
     public String listEmployees(@RequestParam(required = false) String name, @RequestParam(required = false) String active, Model model){
 
-        List<Employee> employees = employeeService.search(name, active);
+        List<User> employees = employeeService.search(name, active);
         model.addAttribute("employees", employees);
         model.addAttribute("name", name);
         model.addAttribute("active", active);
@@ -32,12 +32,12 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public String addForm(Model model){
-        model.addAttribute("employee",new Employee());
+        model.addAttribute("employee",new User());
         return "employee-form";
     }
 
     @PostMapping("/add")
-    public String addValid(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult) {
+    public String addValid(@Valid @ModelAttribute("employee") User employee, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "employee-form";
         }
@@ -52,7 +52,7 @@ public class EmployeeController {
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model){
-        Employee employee = employeeService.getById(id);
+        User employee = employeeService.getById(id);
         model.addAttribute("employee", employee);
         return "employee-form";
     }
